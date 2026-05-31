@@ -1,0 +1,100 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import ProduktCard from "../../../components/ProduktCard.astro";
+import { kategorien, kategorieBySlug } from "../../../data/produkte";
+import { site } from "../../../data/site";
+
+export function getStaticPaths() {
+  const paths = [];
+  for (const kat of kategorien) {
+    for (const gruppe of kat.gruppen) {
+      for (const produkt of gruppe.produkte) {
+        paths.push({
+          params: { kategorie: kat.slug, produkt: produkt.slug },
+          props: { kat, gruppe, produkt },
+        });
+      }
+    }
+  }
+  return paths;
+}
+
+const { kat, gruppe, produkt } = Astro.props;
+const bild = produkt.image ?? gruppe.image ?? kat.image;
+const kategorie = kategorieBySlug(kat.slug)!;
+
+// verwandte Produkte aus derselben Gruppe (max 4, ohne aktuelles)
+const verwandte = gruppe.produkte.filter(p => p.slug !== produkt.slug).slice(0, 4);
+// Betreff für die Anfrage vorbefüllen
+const anfrageHref = `/kontakt?produkt=${encodeURIComponent(produkt.name)}`;
+---
+
+<Layout title={produkt.name} description={produkt.blurb ?? `${produkt.name} von Apato Sport — ${kat.tagline}. Jetzt unverbindlich anfragen.`}>
+  <!-- Breadcrumb -->
+  <div class="border-b bg-white" style="border-color: var(--color-steel-200);">
+    <div class="container-wide py-4 text-sm" style="color: var(--color-steel-500);">
+      <a href="/produkte" class="hover:underline">Produkte</a>
+      <span class="mx-2">/</span>
+      <a href={`/produkte/${kat.slug}`} class="hover:underline">{kat.name}</a>
+      <span class="mx-2">/</span>
+      <span style="color: var(--color-steel-900);">{produkt.name}</span>
+    </div>
+  </div>
+
+  <section class="py-12 md:py-16">
+    <div class="container-wide grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+      <!-- Bild -->
+      <div class="rounded-2xl overflow-hidden border" style="border-color: var(--color-steel-200); background: var(--color-paper-200);">
+        <img src={bild} alt={produkt.name} class="w-full h-full object-cover aspect-[4/3]" />
+      </div>
+
+      <!-- Info -->
+      <div>
+        <div class="eyebrow mb-3">{kat.name}{gruppe.name !== kat.name ? ` · ${gruppe.name}` : ""}</div>
+        <h1 class="text-3xl md:text-4xl mb-5" style="color: var(--color-steel-900);">{produkt.name}</h1>
+        {produkt.blurb && <p class="text-lg leading-relaxed mb-6" style="color: var(--color-steel-600);">{produkt.blurb}</p>}
+
+        {produkt.specs && produkt.specs.length > 0 && (
+          <ul class="space-y-2.5 mb-8">
+            {produkt.specs.map(s => (
+              <li class="flex items-start gap-3 text-sm" style="color: var(--color-steel-700);">
+                <svg class="w-5 h-5 flex-shrink-0 mt-px" style="color: var(--color-apato-600);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                {s}
+              </li>
+            ))}
+          </ul>
+        )}
+
+        <!-- Preis-Box -->
+        <div class="rounded-xl p-6 mb-6" style="background: var(--color-paper-100); border: 1px solid var(--color-steel-200);">
+          <div class="text-sm font-semibold mb-1" style="color: var(--color-steel-900);">Preis auf Anfrage</div>
+          <p class="text-sm" style="color: var(--color-steel-600);">
+            Wir erstellen Ihnen ein individuelles Angebot — inklusive Best-Preis-Garantie. Sondergrößen und Ausführungen auf Wunsch.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <a href={anfrageHref} class="btn-primary text-base">
+            Dieses Produkt anfragen
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round"/></svg>
+          </a>
+          <a href={site.phoneHref} class="btn-outline text-base">{site.phone}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Verwandte Produkte -->
+  {verwandte.length > 0 && (
+    <section class="py-14" style="background: var(--color-paper-100);">
+      <div class="container-wide">
+        <h2 class="text-2xl md:text-3xl mb-8" style="color: var(--color-steel-900);">Ähnliche Produkte</h2>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {verwandte.map(p => (
+            <ProduktCard produkt={p} gruppe={gruppe} kategorie={kategorie} />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+</Layout>

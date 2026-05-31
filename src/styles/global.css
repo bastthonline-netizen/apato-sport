@@ -1,0 +1,148 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@theme {
+  /* === APATO SPORT — Stadion-Look ===
+     Angelehnt an die bestehende Apato-Marke (kräftiges Gelb-Orange auf
+     dunklem Grund), nur hochwertig umgesetzt. Anthrazit/Stahl als Basis
+     passt zum Sportplatz- und Stahlbau-Charakter der Produkte. */
+
+  /* Stahl/Anthrazit — dunkle Basis */
+  --color-steel-950: #0C0E12;
+  --color-steel-900: #14171D;
+  --color-steel-800: #1D222B;
+  --color-steel-700: #2A313D;
+  --color-steel-600: #3C4655;
+  --color-steel-500: #586374;
+  --color-steel-400: #818C9C;
+  --color-steel-300: #B0B8C4;
+  --color-steel-200: #D7DCE3;
+  --color-steel-100: #EAEDF1;
+
+  /* Papier — warmes Hellgrau, freundlicher Hintergrund */
+  --color-paper-50: #FAFAF9;
+  --color-paper-100: #F4F4F2;
+  --color-paper-200: #E8E8E4;
+
+  /* Apato-Orange — Hauptakzent (aus den Original-Bannern) */
+  --color-apato-700: #C2520A;
+  --color-apato-600: #E5630E;
+  --color-apato-500: #F47A1F;
+  --color-apato-400: #F89A4F;
+  --color-apato-100: #FDE6D3;
+
+  /* Signalgelb — zweiter Akzent für Banner-Boxen, sparsam */
+  --color-signal-500: #FFB100;
+  --color-signal-400: #FFC233;
+  --color-signal-100: #FFF1CC;
+
+  /* Rasengrün — sehr dezent für „verfügbar/geprüft"-Akzente */
+  --color-turf-600: #1F7A4D;
+  --color-turf-100: #D6EFE2;
+
+  /* === TYPOGRAFIE === */
+  --font-display: "Archivo", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+
+  /* === SCHATTEN === */
+  --shadow-soft: 0 2px 8px -2px rgba(12, 14, 18, 0.08), 0 4px 16px -4px rgba(12, 14, 18, 0.10);
+  --shadow-lift: 0 8px 24px -6px rgba(12, 14, 18, 0.18), 0 12px 40px -8px rgba(12, 14, 18, 0.14);
+  --shadow-deep: 0 24px 60px -12px rgba(12, 14, 18, 0.32);
+
+  /* === RADIUS === */
+  --radius-card: 0.875rem;
+}
+
+/* === BASE === */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-sans);
+    color: var(--color-steel-900);
+    background: var(--color-paper-50);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+
+  ::selection {
+    background: var(--color-apato-500);
+    color: white;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+/* === WIEDERVERWENDBAR === */
+@layer components {
+  .container-wide {
+    @apply max-w-7xl mx-auto px-6 md:px-10;
+  }
+  .container-narrow {
+    @apply max-w-4xl mx-auto px-6 md:px-10;
+  }
+
+  /* Primär: Apato-Orange, der Standard-CTA */
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-lg text-white font-semibold transition-all;
+    background: var(--color-apato-600);
+  }
+  .btn-primary:hover {
+    background: var(--color-apato-700);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-lift);
+  }
+
+  /* Sekundär: dunkler Stahl */
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all text-white;
+    background: var(--color-steel-900);
+  }
+  .btn-secondary:hover {
+    background: var(--color-steel-950);
+    transform: translateY(-1px);
+  }
+
+  /* Outline auf hellem Grund */
+  .btn-outline {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold border transition-all;
+    border-color: var(--color-steel-300);
+    color: var(--color-steel-900);
+  }
+  .btn-outline:hover {
+    background: var(--color-steel-900);
+    color: white;
+    border-color: var(--color-steel-900);
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold transition-all;
+    color: var(--color-steel-900);
+  }
+  .btn-ghost:hover {
+    background: var(--color-steel-100);
+  }
+
+  .eyebrow {
+    @apply text-xs uppercase tracking-[0.2em] font-bold;
+    color: var(--color-apato-600);
+  }
+
+  .card {
+    @apply rounded-xl border transition-all overflow-hidden;
+    background: white;
+    border-color: var(--color-steel-200);
+  }
+  .card:hover {
+    box-shadow: var(--shadow-lift);
+    transform: translateY(-2px);
+  }
+}

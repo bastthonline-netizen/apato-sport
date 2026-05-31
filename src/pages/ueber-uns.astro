@@ -1,0 +1,72 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
+import { site } from "../data/site";
+import { kategorien, produktAnzahl } from "../data/produkte";
+---
+
+<Layout title="Über uns" description="Apato Sport ist spezialisiert auf die Herstellung und den Vertrieb von Sportplatzprodukten — mit Schwerpunkt Fußball und einer Best-Preis-Garantie.">
+  <PageHero
+    eyebrow="Über uns"
+    title="Sportplatzprodukte vom Hersteller"
+    subtitle="Spezialisiert auf Geräte und Systeme für den Sportplatzbedarf — mit Schwerpunkt im Fußballbereich, einsetzbar für viele Sportarten."
+    image="/images/apato/banner10.jpg"
+  />
+
+  <section class="py-16 md:py-24">
+    <div class="container-wide grid lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-7">
+        <div class="eyebrow mb-4">Wer wir sind</div>
+        <h2 class="text-3xl md:text-4xl mb-6" style="color: var(--color-steel-900);">Alles für den Sportplatz — aus einer Hand.</h2>
+        <div class="space-y-5 text-lg leading-relaxed" style="color: var(--color-steel-600);">
+          <p>
+            Apato Sport ist spezialisiert auf die Herstellung und den Vertrieb von Geräten und Systemen für den Sportplatzbedarf. Unser Schwerpunkt liegt im Fußballbereich — viele unserer Produkte lassen sich aber für die unterschiedlichsten Sportarten einsetzen.
+          </p>
+          <p>
+            Vom einzelnen Fußballtor über Anzeigetafeln, Spielerbänke und Tribünen bis hin zu kompletten öffentlichen Sportanlagen: Wir liefern robuste, langlebige Lösungen für Vereine, Schulen, Kommunen und den Profibereich.
+          </p>
+          <p>
+            Weil wir selbst herstellen und vertreiben, sparen Sie sich den teuren Zwischenhandel. Dafür stehen wir mit unserer <strong style="color: var(--color-steel-900);">Best-Preis-Garantie</strong> ein.
+          </p>
+        </div>
+      </div>
+
+      <div class="lg:col-span-5">
+        <div class="rounded-2xl p-8 text-white" style="background: var(--color-steel-900);">
+          <div class="grid grid-cols-2 gap-6">
+            <div>
+              <div class="font-display text-4xl mb-1" style="color: var(--color-apato-500);">{kategorien.length}</div>
+              <div class="text-sm text-white/70">Produktkategorien</div>
+            </div>
+            <div>
+              <div class="font-display text-4xl mb-1" style="color: var(--color-apato-500);">{produktAnzahl}+</div>
+              <div class="text-sm text-white/70">Produkte im Katalog</div>
+            </div>
+            <div>
+              <div class="font-display text-4xl mb-1" style="color: var(--color-apato-500);">★</div>
+              <div class="text-sm text-white/70">Best-Preis-Garantie</div>
+            </div>
+            <div>
+              <div class="font-display text-4xl mb-1" style="color: var(--color-apato-500);">⚡</div>
+              <div class="text-sm text-white/70">Schnelle Lieferung</div>
+            </div>
+          </div>
+          <a href="/kontakt" class="btn-primary w-full justify-center mt-8">Projekt anfragen</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16" style="background: var(--color-paper-100);">
+    <div class="container-wide">
+      <div class="grid sm:grid-cols-3 gap-4">
+        {site.usp.map(u => (
+          <div class="p-7 rounded-xl border" style="background: white; border-color: var(--color-steel-200);">
+            <h3 class="text-xl mb-2" style="color: var(--color-steel-900);">{u.title}</h3>
+            <p class="text-sm leading-relaxed" style="color: var(--color-steel-600);">{u.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

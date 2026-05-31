@@ -1,0 +1,175 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
+import { site } from "../data/site";
+
+// Betreff wird clientseitig aus ?produkt=... vorbefüllt (statischer Build →
+// Astro.url.searchParams ist zur Build-Zeit leer, daher per JS unten).
+// Formspree o.ä. erst bei Live-Schaltung eintragen. Solange kein Endpoint
+// hinterlegt ist, nutzt das Formular einen mailto-Fallback (kein Server nötig).
+const FORM_ENDPOINT = ""; // z.B. "https://formspree.io/f/xxxx" — von Apato/DT bei Live setzen
+---
+
+<Layout title="Kontakt & Anfrage" description="Stellen Sie Apato Sport Ihre unverbindliche Anfrage — wir erstellen Ihnen ein passendes Angebot mit Best-Preis-Garantie.">
+  <PageHero
+    eyebrow="Kontakt"
+    title="Anfrage senden"
+    subtitle="Schildern Sie uns Ihr Projekt oder das gewünschte Produkt — wir melden uns mit einem unverbindlichen Angebot."
+  />
+
+  <section class="py-16 md:py-24">
+    <div class="container-wide grid lg:grid-cols-12 gap-12">
+      <!-- Kontaktinfos -->
+      <div class="lg:col-span-4">
+        <h2 class="text-2xl mb-6" style="color: var(--color-steel-900);">Direkter Draht</h2>
+        <ul class="space-y-5">
+          <li>
+            <div class="text-xs uppercase tracking-[0.15em] font-bold mb-1" style="color: var(--color-apato-600);">Telefon</div>
+            <a href={site.phoneHref} class="text-lg font-semibold hover:underline" style="color: var(--color-steel-900);">{site.phone}</a>
+          </li>
+          <li>
+            <div class="text-xs uppercase tracking-[0.15em] font-bold mb-1" style="color: var(--color-apato-600);">E-Mail</div>
+            <a href={site.emailHref} class="text-lg font-semibold hover:underline break-all" style="color: var(--color-steel-900);">{site.email}</a>
+          </li>
+          <li>
+            <div class="text-xs uppercase tracking-[0.15em] font-bold mb-1" style="color: var(--color-apato-600);">Region</div>
+            <div class="text-lg" style="color: var(--color-steel-700);">{site.country}</div>
+          </li>
+        </ul>
+        <div class="mt-8 p-5 rounded-xl" style="background: var(--color-paper-100); border: 1px solid var(--color-steel-200);">
+          <div class="font-semibold mb-1" style="color: var(--color-steel-900);">★ Best-Preis-Garantie</div>
+          <p class="text-sm" style="color: var(--color-steel-600);">Vergleichbares Produkt woanders günstiger? Sagen Sie uns Bescheid — wir ziehen mit.</p>
+        </div>
+      </div>
+
+      <!-- Formular -->
+      <div class="lg:col-span-8">
+        <form
+          id="anfrage-form"
+          class="rounded-2xl border p-6 md:p-8 space-y-5"
+          style="background: white; border-color: var(--color-steel-200);"
+          method="POST"
+          action={FORM_ENDPOINT || undefined}
+          data-endpoint={FORM_ENDPOINT}
+          data-mailto={site.email}
+        >
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label for="name" class="block text-sm font-semibold mb-1.5" style="color: var(--color-steel-800);">Name *</label>
+              <input id="name" name="name" type="text" required autocomplete="name"
+                class="w-full rounded-lg border px-4 py-2.5 outline-none focus:ring-2 transition"
+                style="border-color: var(--color-steel-300);" />
+            </div>
+            <div>
+              <label for="firma" class="block text-sm font-semibold mb-1.5" style="color: var(--color-steel-800);">Verein / Firma</label>
+              <input id="firma" name="firma" type="text" autocomplete="organization"
+                class="w-full rounded-lg border px-4 py-2.5 outline-none focus:ring-2 transition"
+                style="border-color: var(--color-steel-300);" />
+            </div>
+            <div>
+              <label for="email" class="block text-sm font-semibold mb-1.5" style="color: var(--color-steel-800);">E-Mail *</label>
+              <input id="email" name="email" type="email" required autocomplete="email"
+                class="w-full rounded-lg border px-4 py-2.5 outline-none focus:ring-2 transition"
+                style="border-color: var(--color-steel-300);" />
+            </div>
+            <div>
+              <label for="telefon" class="block text-sm font-semibold mb-1.5" style="color: var(--color-steel-800);">Telefon</label>
+              <input id="telefon" name="telefon" type="tel" autocomplete="tel"
+                class="w-full rounded-lg border px-4 py-2.5 outline-none focus:ring-2 transition"
+                style="border-color: var(--color-steel-300);" />
+            </div>
+          </div>
+
+          <div>
+            <label for="betreff" class="block text-sm font-semibold mb-1.5" style="color: var(--color-steel-800);">Betreff / Produkt</label>
+            <input id="betreff" name="betreff" type="text"
+              placeholder="z.B. Fußballtor 7,32 × 2,44 m"
+              class="w-full rounded-lg border px-4 py-2.5 outline-none focus:ring-2 transition"
+              style="border-color: var(--color-steel-300);" />
+          </div>
+
+          <div>
+            <label for="nachricht" class="block text-sm font-semibold mb-1.5" style="color: var(--color-steel-800);">Ihre Nachricht *</label>
+            <textarea id="nachricht" name="nachricht" required rows="5"
+              placeholder="Was benötigen Sie? Stückzahl, Maße, Lieferort …"
+              class="w-full rounded-lg border px-4 py-2.5 outline-none focus:ring-2 transition resize-y"
+              style="border-color: var(--color-steel-300);"></textarea>
+          </div>
+
+          <!-- Honeypot gegen Spam-Bots: für Menschen unsichtbar -->
+          <div aria-hidden="true" style="position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;">
+            <label for="website-feld">Bitte dieses Feld leer lassen</label>
+            <input id="website-feld" name="website-feld" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <div class="flex items-start gap-2.5">
+            <input id="datenschutz-ok" name="datenschutz-ok" type="checkbox" required class="mt-1" />
+            <label for="datenschutz-ok" class="text-sm" style="color: var(--color-steel-600);">
+              Ich habe die <a href="/datenschutz" class="underline" style="color: var(--color-apato-600);">Datenschutzerklärung</a> gelesen und bin mit der Verarbeitung meiner Angaben zur Bearbeitung der Anfrage einverstanden. *
+            </label>
+          </div>
+
+          <div class="flex items-center gap-4 flex-wrap">
+            <button type="submit" class="btn-primary text-base">
+              Anfrage absenden
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round"/></svg>
+            </button>
+            <p id="form-status" class="text-sm" style="color: var(--color-steel-500);" role="status" aria-live="polite"></p>
+          </div>
+          <p class="text-xs" style="color: var(--color-steel-400);">* Pflichtfelder. Wir verwenden Ihre Angaben ausschließlich zur Bearbeitung Ihrer Anfrage.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  #anfrage-form input:focus, #anfrage-form textarea:focus {
+    border-color: var(--color-apato-500);
+    box-shadow: 0 0 0 3px var(--color-apato-100);
+  }
+</style>
+
+<script>
+  const form = document.getElementById("anfrage-form") as HTMLFormElement | null;
+  const status = document.getElementById("form-status");
+
+  // Betreff aus ?produkt=... vorbefüllen (sicher: nur als .value, kein innerHTML)
+  const produkt = new URLSearchParams(window.location.search).get("produkt");
+  const betreffInput = document.getElementById("betreff") as HTMLInputElement | null;
+  if (produkt && betreffInput && !betreffInput.value) {
+    betreffInput.value = produkt;
+  }
+
+  form?.addEventListener("submit", (e) => {
+    if (!form) return;
+    const honeypot = (form.querySelector('[name="website-feld"]') as HTMLInputElement)?.value;
+    const endpoint = form.dataset.endpoint;
+    const mailto = form.dataset.mailto;
+
+    // Bot erkannt (Honeypot ausgefüllt) → still abbrechen
+    if (honeypot) {
+      e.preventDefault();
+      return;
+    }
+
+    // Kein echter Form-Endpoint hinterlegt → sauberer mailto-Fallback,
+    // damit die Demo ohne Server funktioniert und keine Daten verloren gehen.
+    if (!endpoint) {
+      e.preventDefault();
+      const get = (n: string) => (form.querySelector(`[name="${n}"]`) as HTMLInputElement | HTMLTextAreaElement)?.value ?? "";
+      const betreff = get("betreff") || "Anfrage über die Website";
+      const body =
+        `Name: ${get("name")}\n` +
+        `Verein/Firma: ${get("firma")}\n` +
+        `E-Mail: ${get("email")}\n` +
+        `Telefon: ${get("telefon")}\n` +
+        `Betreff/Produkt: ${get("betreff")}\n\n` +
+        `${get("nachricht")}`;
+      window.location.href =
+        `mailto:${mailto}?subject=${encodeURIComponent(betreff)}&body=${encodeURIComponent(body)}`;
+      if (status) status.textContent = "Ihr E-Mail-Programm wird geöffnet …";
+    }
+    // Mit Endpoint: normales POST an den Form-Dienst (z.B. Formspree).
+  });
+</script>

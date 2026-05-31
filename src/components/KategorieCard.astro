@@ -1,0 +1,26 @@
+---
+import type { Kategorie } from "../data/produkte";
+interface Props {
+  kat: Kategorie;
+}
+const { kat } = Astro.props;
+const anzahl = kat.gruppen.reduce((n, g) => n + g.produkte.length, 0);
+---
+
+<a href={`/produkte/${kat.slug}`} class="group card flex flex-col">
+  <div class="relative aspect-[16/10] overflow-hidden" style="background: var(--color-paper-200);">
+    <img src={kat.image} alt={kat.name} class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+    <div class="absolute inset-0" style="background: linear-gradient(180deg, transparent 45%, rgba(12,14,18,0.78) 100%);"></div>
+    <div class="absolute bottom-4 left-5 right-5">
+      <div class="font-display text-2xl text-white drop-shadow">{kat.name}</div>
+      <div class="text-xs text-white/80 mt-0.5">{anzahl} Produkte</div>
+    </div>
+  </div>
+  <div class="p-5 flex-1 flex flex-col">
+    <p class="text-sm leading-relaxed mb-4 flex-1" style="color: var(--color-steel-600);">{kat.tagline}</p>
+    <span class="font-semibold text-sm inline-flex items-center gap-1 transition-transform group-hover:translate-x-0.5" style="color: var(--color-apato-600);">
+      Ansehen
+      <svg class="w-3.5 h-3.5" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h6M6 3l3 3-3 3" stroke-linecap="round"/></svg>
+    </span>
+  </div>
+</a>

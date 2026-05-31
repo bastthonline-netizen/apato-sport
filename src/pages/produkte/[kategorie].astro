@@ -1,0 +1,67 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import PageHero from "../../components/PageHero.astro";
+import ProduktCard from "../../components/ProduktCard.astro";
+import { kategorien } from "../../data/produkte";
+import { site } from "../../data/site";
+
+export function getStaticPaths() {
+  return kategorien.map((kat) => ({
+    params: { kategorie: kat.slug },
+    props: { kat },
+  }));
+}
+
+const { kat } = Astro.props;
+const anzahl = kat.gruppen.reduce((n, g) => n + g.produkte.length, 0);
+const mehrAlsEineGruppe = kat.gruppen.length > 1;
+---
+
+<Layout title={kat.name} description={kat.intro}>
+  <PageHero eyebrow={kat.tagline} title={kat.name} subtitle={kat.intro} image={kat.image} />
+
+  <!-- Breadcrumb -->
+  <div class="border-b" style="border-color: var(--color-steel-200);">
+    <div class="container-wide py-4 text-sm" style="color: var(--color-steel-500);">
+      <a href="/produkte" class="hover:underline">Produkte</a>
+      <span class="mx-2">/</span>
+      <span style="color: var(--color-steel-900);">{kat.name}</span>
+      <span class="ml-3" style="color: var(--color-steel-400);">· {anzahl} Produkte</span>
+    </div>
+  </div>
+
+  <section class="py-14 md:py-20">
+    <div class="container-wide space-y-14">
+      {kat.gruppen.map(gruppe => (
+        <div>
+          {mehrAlsEineGruppe && (
+            <div class="flex items-center gap-4 mb-6">
+              <h2 class="text-2xl md:text-3xl" style="color: var(--color-steel-900);">{gruppe.name}</h2>
+              <span class="flex-1 h-px" style="background: var(--color-steel-200);"></span>
+              <span class="text-sm" style="color: var(--color-steel-500);">{gruppe.produkte.length} Produkte</span>
+            </div>
+          )}
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+            {gruppe.produkte.map(produkt => (
+              <ProduktCard produkt={produkt} gruppe={gruppe} kategorie={kat} />
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16" style="background: var(--color-paper-100);">
+    <div class="container-narrow text-center">
+      <h2 class="text-3xl md:text-4xl mb-4" style="color: var(--color-steel-900);">Nicht das Richtige dabei?</h2>
+      <p class="text-lg mb-7" style="color: var(--color-steel-600);">
+        Wir fertigen viele Produkte auch in Sondergrößen. Schildern Sie uns Ihr Projekt.
+      </p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="/kontakt" class="btn-primary">Anfrage senden</a>
+        <a href={site.phoneHref} class="btn-outline">{site.phone}</a>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,21 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import PageHero from "../../components/PageHero.astro";
+import KategorieCard from "../../components/KategorieCard.astro";
+import { kategorien, produktAnzahl } from "../../data/produkte";
+---
+
+<Layout title="Produkte" description="Das komplette Sortiment von Apato Sport: Fußballtore, Anzeigetafeln, Tribünen, Spielerbänke, Ballfangzäune, öffentliche Anlagen und Trainingsausrüstung.">
+  <PageHero
+    eyebrow="Sortiment"
+    title="Unsere Produkte"
+    subtitle={`${kategorien.length} Kategorien, über ${produktAnzahl} Produkte — alles für Sportplatz, Verein und Kommune.`}
+    image="/images/apato/banner02.jpg"
+  />
+
+  <section class="py-16 md:py-24">
+    <div class="container-wide grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {kategorien.map(kat => <KategorieCard kat={kat} />)}
+    </div>
+  </section>
+</Layout>

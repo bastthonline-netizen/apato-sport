@@ -1,0 +1,25 @@
+---
+import type { Produkt, Gruppe, Kategorie } from "../data/produkte";
+interface Props {
+  produkt: Produkt;
+  gruppe: Gruppe;
+  kategorie: Kategorie;
+}
+const { produkt, gruppe, kategorie } = Astro.props;
+const bild = produkt.image ?? gruppe.image ?? kategorie.image;
+const href = `/produkte/${kategorie.slug}/${produkt.slug}`;
+---
+
+<a href={href} class="group card flex flex-col">
+  <div class="relative aspect-[4/3] overflow-hidden" style="background: var(--color-paper-200);">
+    <img src={bild} alt={produkt.name} class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+  </div>
+  <div class="p-4 flex-1 flex flex-col">
+    <h3 class="text-base font-semibold leading-snug mb-1" style="color: var(--color-steel-900); font-family: var(--font-sans);">{produkt.name}</h3>
+    {produkt.blurb && <p class="text-sm leading-relaxed mb-3 flex-1" style="color: var(--color-steel-500);">{produkt.blurb}</p>}
+    <span class={`font-semibold text-sm inline-flex items-center gap-1 transition-transform group-hover:translate-x-0.5 ${produkt.blurb ? "" : "mt-auto pt-2"}`} style="color: var(--color-apato-600);">
+      Details & Anfrage
+      <svg class="w-3.5 h-3.5" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h6M6 3l3 3-3 3" stroke-linecap="round"/></svg>
+    </span>
+  </div>
+</a>
