@@ -1,6 +1,7 @@
 ---
 import { site } from "../data/site";
 import { kategorien } from "../data/produkte";
+import { u } from "../lib/url";
 const year = new Date().getFullYear();
 const hauptKategorien = kategorien.slice(0, 6);
 ---
@@ -8,7 +9,7 @@ const hauptKategorien = kategorien.slice(0, 6);
 <footer class="bg-[var(--color-steel-950)] text-white">
   <div class="container-wide py-16 grid gap-12 md:grid-cols-12">
     <div class="md:col-span-4">
-      <img src="/images/apato/logo.png" alt="Apato Sport" class="h-11 w-auto mb-5" />
+      <img src={u("/images/apato/logo.png")} alt="Apato Sport" class="h-11 w-auto mb-5" />
       <p class="text-sm leading-relaxed text-white/70 max-w-xs">
         {site.tagline}. Vom Fußballtor bis zur kompletten Sportanlage — direkt vom Hersteller.
       </p>
@@ -21,9 +22,9 @@ const hauptKategorien = kategorien.slice(0, 6);
       <div class="text-xs uppercase tracking-[0.2em] font-bold mb-4 text-white/50">Produkte</div>
       <ul class="grid grid-cols-2 gap-y-2 text-sm">
         {hauptKategorien.map(kat => (
-          <li><a href={`/produkte/${kat.slug}`} class="text-white/75 hover:text-white transition-colors">{kat.name}</a></li>
+          <li><a href={u(`/produkte/${kat.slug}`)} class="text-white/75 hover:text-white transition-colors">{kat.name}</a></li>
         ))}
-        <li class="col-span-2 mt-1"><a href="/produkte" class="font-semibold" style="color: var(--color-apato-400);">Alle Produkte →</a></li>
+        <li class="col-span-2 mt-1"><a href={u("/produkte")} class="font-semibold" style="color: var(--color-apato-400);">Alle Produkte →</a></li>
       </ul>
     </div>
 
@@ -34,7 +35,7 @@ const hauptKategorien = kategorien.slice(0, 6);
         <li><a href={site.emailHref} class="hover:text-white transition-colors">{site.email}</a></li>
         <li class="pt-1">{site.country}</li>
       </ul>
-      <a href="/kontakt" class="btn-primary mt-5 text-sm py-2 px-4">Jetzt anfragen</a>
+      <a href={u("/kontakt")} class="btn-primary mt-5 text-sm py-2 px-4">Jetzt anfragen</a>
     </div>
   </div>
 
@@ -42,8 +43,8 @@ const hauptKategorien = kategorien.slice(0, 6);
     <div class="container-wide py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/50">
       <div>© {year} {site.name}. Alle Rechte vorbehalten.</div>
       <div class="flex items-center gap-5">
-        <a href="/impressum" class="hover:text-white transition-colors">Impressum</a>
-        <a href="/datenschutz" class="hover:text-white transition-colors">Datenschutz</a>
+        <a href={u("/impressum")} class="hover:text-white transition-colors">Impressum</a>
+        <a href={u("/datenschutz")} class="hover:text-white transition-colors">Datenschutz</a>
       </div>
     </div>
   </div>

@@ -1,5 +1,6 @@
 ---
 import type { Kategorie } from "../data/produkte";
+import { u } from "../lib/url";
 interface Props {
   kat: Kategorie;
 }
@@ -7,9 +8,9 @@ const { kat } = Astro.props;
 const anzahl = kat.gruppen.reduce((n, g) => n + g.produkte.length, 0);
 ---
 
-<a href={`/produkte/${kat.slug}`} class="group card flex flex-col">
+<a href={u(`/produkte/${kat.slug}`)} class="group card flex flex-col">
   <div class="relative aspect-[16/10] overflow-hidden" style="background: var(--color-paper-200);">
-    <img src={kat.image} alt={kat.name} class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+    <img src={u(kat.image)} alt={kat.name} class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
     <div class="absolute inset-0" style="background: linear-gradient(180deg, transparent 45%, rgba(12,14,18,0.78) 100%);"></div>
     <div class="absolute bottom-4 left-5 right-5">
       <div class="font-display text-2xl text-white drop-shadow">{kat.name}</div>

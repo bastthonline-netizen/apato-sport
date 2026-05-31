@@ -8,6 +8,8 @@ import { site } from "../data/site";
 // Formspree o.ä. erst bei Live-Schaltung eintragen. Solange kein Endpoint
 // hinterlegt ist, nutzt das Formular einen mailto-Fallback (kein Server nötig).
 const FORM_ENDPOINT = ""; // z.B. "https://formspree.io/f/xxxx" — von Apato/DT bei Live setzen
+
+import { u } from "../lib/url";
 ---
 
 <Layout title="Kontakt & Anfrage" description="Stellen Sie Apato Sport Ihre unverbindliche Anfrage — wir erstellen Ihnen ein passendes Angebot mit Best-Preis-Garantie.">
@@ -105,7 +107,7 @@ const FORM_ENDPOINT = ""; // z.B. "https://formspree.io/f/xxxx" — von Apato/DT
           <div class="flex items-start gap-2.5">
             <input id="datenschutz-ok" name="datenschutz-ok" type="checkbox" required class="mt-1" />
             <label for="datenschutz-ok" class="text-sm" style="color: var(--color-steel-600);">
-              Ich habe die <a href="/datenschutz" class="underline" style="color: var(--color-apato-600);">Datenschutzerklärung</a> gelesen und bin mit der Verarbeitung meiner Angaben zur Bearbeitung der Anfrage einverstanden. *
+              Ich habe die <a href={u("/datenschutz")} class="underline" style="color: var(--color-apato-600);">Datenschutzerklärung</a> gelesen und bin mit der Verarbeitung meiner Angaben zur Bearbeitung der Anfrage einverstanden. *
             </label>
           </div>
 

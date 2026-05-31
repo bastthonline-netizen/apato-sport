@@ -3,6 +3,7 @@ import Layout from "../../../layouts/Layout.astro";
 import ProduktCard from "../../../components/ProduktCard.astro";
 import { kategorien, kategorieBySlug } from "../../../data/produkte";
 import { site } from "../../../data/site";
+import { u } from "../../../lib/url";
 
 export function getStaticPaths() {
   const paths = [];
@@ -26,16 +27,16 @@ const kategorie = kategorieBySlug(kat.slug)!;
 // verwandte Produkte aus derselben Gruppe (max 4, ohne aktuelles)
 const verwandte = gruppe.produkte.filter(p => p.slug !== produkt.slug).slice(0, 4);
 // Betreff für die Anfrage vorbefüllen
-const anfrageHref = `/kontakt?produkt=${encodeURIComponent(produkt.name)}`;
+const anfrageHref = u(`/kontakt?produkt=${encodeURIComponent(produkt.name)}`);
 ---
 
 <Layout title={produkt.name} description={produkt.blurb ?? `${produkt.name} von Apato Sport — ${kat.tagline}. Jetzt unverbindlich anfragen.`}>
   <!-- Breadcrumb -->
   <div class="border-b bg-white" style="border-color: var(--color-steel-200);">
     <div class="container-wide py-4 text-sm" style="color: var(--color-steel-500);">
-      <a href="/produkte" class="hover:underline">Produkte</a>
+      <a href={u("/produkte")} class="hover:underline">Produkte</a>
       <span class="mx-2">/</span>
-      <a href={`/produkte/${kat.slug}`} class="hover:underline">{kat.name}</a>
+      <a href={u(`/produkte/${kat.slug}`)} class="hover:underline">{kat.name}</a>
       <span class="mx-2">/</span>
       <span style="color: var(--color-steel-900);">{produkt.name}</span>
     </div>
@@ -45,7 +46,7 @@ const anfrageHref = `/kontakt?produkt=${encodeURIComponent(produkt.name)}`;
     <div class="container-wide grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
       <!-- Bild -->
       <div class="rounded-2xl overflow-hidden border" style="border-color: var(--color-steel-200); background: var(--color-paper-200);">
-        <img src={bild} alt={produkt.name} class="w-full h-full object-cover aspect-[4/3]" />
+        <img src={u(bild)} alt={produkt.name} class="w-full h-full object-cover aspect-[4/3]" />
       </div>
 
       <!-- Info -->

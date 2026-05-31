@@ -5,13 +5,14 @@ interface Props {
   subtitle?: string;
   image?: string;
 }
+import { u } from "../lib/url";
 const { eyebrow, title, subtitle, image } = Astro.props;
 ---
 
 <section class="relative overflow-hidden bg-[var(--color-steel-950)] text-white">
   {image && (
     <div class="absolute inset-0 -z-0">
-      <img src={image} alt="" class="w-full h-full object-cover opacity-30" />
+      <img src={u(image)} alt="" class="w-full h-full object-cover opacity-30" />
       <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(12,14,18,0.75) 0%, rgba(12,14,18,0.92) 100%);"></div>
     </div>
   )}

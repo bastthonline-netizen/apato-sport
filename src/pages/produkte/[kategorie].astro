@@ -4,6 +4,7 @@ import PageHero from "../../components/PageHero.astro";
 import ProduktCard from "../../components/ProduktCard.astro";
 import { kategorien } from "../../data/produkte";
 import { site } from "../../data/site";
+import { u } from "../../lib/url";
 
 export function getStaticPaths() {
   return kategorien.map((kat) => ({
@@ -23,7 +24,7 @@ const mehrAlsEineGruppe = kat.gruppen.length > 1;
   <!-- Breadcrumb -->
   <div class="border-b" style="border-color: var(--color-steel-200);">
     <div class="container-wide py-4 text-sm" style="color: var(--color-steel-500);">
-      <a href="/produkte" class="hover:underline">Produkte</a>
+      <a href={u("/produkte")} class="hover:underline">Produkte</a>
       <span class="mx-2">/</span>
       <span style="color: var(--color-steel-900);">{kat.name}</span>
       <span class="ml-3" style="color: var(--color-steel-400);">· {anzahl} Produkte</span>
@@ -59,7 +60,7 @@ const mehrAlsEineGruppe = kat.gruppen.length > 1;
         Wir fertigen viele Produkte auch in Sondergrößen. Schildern Sie uns Ihr Projekt.
       </p>
       <div class="flex flex-wrap gap-4 justify-center">
-        <a href="/kontakt" class="btn-primary">Anfrage senden</a>
+        <a href={u("/kontakt")} class="btn-primary">Anfrage senden</a>
         <a href={site.phoneHref} class="btn-outline">{site.phone}</a>
       </div>
     </div>

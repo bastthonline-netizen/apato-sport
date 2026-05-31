@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { u } from "../lib/url";
 ---
 
 <Layout title="Seite nicht gefunden">
@@ -11,8 +12,8 @@ import Layout from "../layouts/Layout.astro";
         Vielleicht hilft Ihnen der Weg zurück zum Sortiment.
       </p>
       <div class="flex flex-wrap gap-4 justify-center">
-        <a href="/" class="btn-primary">Zur Startseite</a>
-        <a href="/produkte" class="btn-outline">Alle Produkte</a>
+        <a href={u("/")} class="btn-primary">Zur Startseite</a>
+        <a href={u("/produkte")} class="btn-outline">Alle Produkte</a>
       </div>
     </div>
   </section>

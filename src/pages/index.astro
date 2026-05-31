@@ -3,13 +3,14 @@ import Layout from "../layouts/Layout.astro";
 import KategorieCard from "../components/KategorieCard.astro";
 import { site } from "../data/site";
 import { kategorien, produktAnzahl } from "../data/produkte";
+import { u } from "../lib/url";
 ---
 
 <Layout>
   <!-- HERO -->
   <section class="relative min-h-[82vh] flex items-center overflow-hidden bg-[var(--color-steel-950)]">
     <div class="absolute inset-0 -z-0">
-      <img src="/images/apato/banner05.jpg" alt="Fußballtor auf dem Sportplatz" class="w-full h-full object-cover opacity-45" />
+      <img src={u("/images/apato/banner05.jpg")} alt="Fußballtor auf dem Sportplatz" class="w-full h-full object-cover opacity-45" />
       <div class="absolute inset-0" style="background: linear-gradient(110deg, rgba(12,14,18,0.92) 0%, rgba(12,14,18,0.7) 55%, rgba(12,14,18,0.45) 100%);"></div>
     </div>
 
@@ -25,11 +26,11 @@ import { kategorien, produktAnzahl } from "../data/produkte";
           Apato Sport ist Hersteller von Sportplatzprodukten — Fußballtore, Anzeigetafeln, Tribünen, Spielerbänke, Ballfangzäune und komplette Sportanlagen. Direkt vom Hersteller, zum besten Preis.
         </p>
         <div class="flex flex-wrap gap-4">
-          <a href="/produkte" class="btn-primary text-base">
+          <a href={u("/produkte")} class="btn-primary text-base">
             Produkte entdecken
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round"/></svg>
           </a>
-          <a href="/kontakt" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold border border-white/30 text-white hover:bg-white/10 transition-all">
+          <a href={u("/kontakt")} class="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold border border-white/30 text-white hover:bg-white/10 transition-all">
             Angebot anfragen
           </a>
         </div>
@@ -91,7 +92,7 @@ import { kategorien, produktAnzahl } from "../data/produkte";
             Von einzelnen Toren bis zur kompletten Anlage — wählen Sie eine Kategorie.
           </p>
         </div>
-        <a href="/produkte" class="btn-ghost">Alle Produkte →</a>
+        <a href={u("/produkte")} class="btn-ghost">Alle Produkte →</a>
       </div>
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {kategorien.map(kat => <KategorieCard kat={kat} />)}
@@ -101,7 +102,7 @@ import { kategorien, produktAnzahl } from "../data/produkte";
 
   <!-- BILDBANNER -->
   <section class="relative h-[48vh] md:h-[58vh] overflow-hidden">
-    <img src="/images/apato/banner08.jpg" alt="Öffentliche Sportanlage von Apato Sport" class="w-full h-full object-cover" />
+    <img src={u("/images/apato/banner08.jpg")} alt="Öffentliche Sportanlage von Apato Sport" class="w-full h-full object-cover" />
     <div class="absolute inset-0 flex items-center" style="background: linear-gradient(90deg, rgba(12,14,18,0.88) 0%, rgba(12,14,18,0.4) 60%, transparent 100%);">
       <div class="container-wide">
         <div class="max-w-xl text-white">
@@ -110,7 +111,7 @@ import { kategorien, produktAnzahl } from "../data/produkte";
           <p class="text-lg leading-relaxed text-white/85 mb-7">
             Bolzplatz-Tore, Soccer Courts und Multifunktions-Sportplätze für Kommunen, Schulen und Vereine — robust und langlebig.
           </p>
-          <a href="/produkte/oeffentliche-anlagen" class="btn-primary">
+          <a href={u("/produkte/oeffentliche-anlagen")} class="btn-primary">
             Öffentliche Anlagen ansehen
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round"/></svg>
           </a>
@@ -130,7 +131,7 @@ import { kategorien, produktAnzahl } from "../data/produkte";
             Schildern Sie uns Ihr Vorhaben — wir erstellen Ihnen ein passendes Angebot mit Best-Preis-Garantie.
           </p>
           <div class="flex flex-wrap gap-4 justify-center">
-            <a href="/kontakt" class="btn-primary text-base">Anfrage senden</a>
+            <a href={u("/kontakt")} class="btn-primary text-base">Anfrage senden</a>
             <a href={site.phoneHref} class="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold border border-white/30 text-white hover:bg-white/10 transition-all">{site.phone}</a>
           </div>
         </div>
