@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import PageHero from "../components/PageHero.astro";
 import { site } from "../data/site";
 import { kategorien, produktAnzahl } from "../data/produkte";
+import { u } from "../lib/url";
 ---
 
 <Layout title="Über uns" description="Apato Sport ist spezialisiert auf die Herstellung und den Vertrieb von Sportplatzprodukten — mit Schwerpunkt Fußball und einer Best-Preis-Garantie.">
@@ -51,7 +52,7 @@ import { kategorien, produktAnzahl } from "../data/produkte";
               <div class="text-sm text-white/70">Schnelle Lieferung</div>
             </div>
           </div>
-          <a href="/kontakt" class="btn-primary w-full justify-center mt-8">Projekt anfragen</a>
+          <a href={u("/kontakt")} class="btn-primary w-full justify-center mt-8">Projekt anfragen</a>
         </div>
       </div>
     </div>

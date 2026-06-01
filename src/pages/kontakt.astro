@@ -2,14 +2,13 @@
 import Layout from "../layouts/Layout.astro";
 import PageHero from "../components/PageHero.astro";
 import { site } from "../data/site";
+import { u } from "../lib/url";
 
 // Betreff wird clientseitig aus ?produkt=... vorbefüllt (statischer Build →
 // Astro.url.searchParams ist zur Build-Zeit leer, daher per JS unten).
 // Formspree o.ä. erst bei Live-Schaltung eintragen. Solange kein Endpoint
 // hinterlegt ist, nutzt das Formular einen mailto-Fallback (kein Server nötig).
 const FORM_ENDPOINT = ""; // z.B. "https://formspree.io/f/xxxx" — von Apato/DT bei Live setzen
-
-import { u } from "../lib/url";
 ---
 
 <Layout title="Kontakt & Anfrage" description="Stellen Sie Apato Sport Ihre unverbindliche Anfrage — wir erstellen Ihnen ein passendes Angebot mit Best-Preis-Garantie.">
