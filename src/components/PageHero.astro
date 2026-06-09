@@ -3,23 +3,17 @@ interface Props {
   eyebrow?: string;
   title: string;
   subtitle?: string;
-  image?: string;
+  image?: string; // bleibt optional kompatibel, wird im editorialen Stil nicht mehr als Vollbild genutzt
 }
-import { u } from "../lib/url";
-const { eyebrow, title, subtitle, image } = Astro.props;
+const { eyebrow, title, subtitle } = Astro.props;
 ---
 
-<section class="relative overflow-hidden bg-[var(--color-steel-950)] text-white">
-  {image && (
-    <div class="absolute inset-0 -z-0">
-      <img src={u(image)} alt="" class="w-full h-full object-cover opacity-30" />
-      <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(12,14,18,0.75) 0%, rgba(12,14,18,0.92) 100%);"></div>
-    </div>
-  )}
-  <div class="container-wide relative py-20 md:py-28">
-    {eyebrow && <div class="eyebrow mb-4" style="color: var(--color-apato-400);">{eyebrow}</div>}
-    <h1 class="text-4xl md:text-6xl max-w-3xl">{title}</h1>
-    {subtitle && <p class="mt-6 text-lg md:text-xl text-white/80 max-w-2xl leading-relaxed">{subtitle}</p>}
+<!-- Editorial-Hero: hell, Serif, viel Weißraum (V1-Stil) -->
+<section class="border-b" style="background: var(--color-paper-50); border-color: var(--color-steel-200);">
+  <div class="container-wide py-16 md:py-24">
+    {eyebrow && <div class="eyebrow mb-5">{eyebrow}</div>}
+    <h1 class="text-4xl md:text-6xl max-w-3xl" style="color: var(--color-steel-900);" set:html={title} />
+    {subtitle && <p class="mt-6 text-lg md:text-xl leading-relaxed max-w-2xl" style="color: var(--color-steel-600);">{subtitle}</p>}
     <slot />
   </div>
 </section>

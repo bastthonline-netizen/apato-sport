@@ -7,72 +7,61 @@ import { u } from "../lib/url";
 ---
 
 <Layout>
-  <!-- HERO -->
-  <section class="relative min-h-[82vh] flex items-center overflow-hidden bg-[var(--color-steel-950)]">
-    <div class="absolute inset-0 -z-0">
-      <img src={u("/images/apato/banner05.jpg")} alt="Fußballtor auf dem Sportplatz" class="w-full h-full object-cover opacity-45" />
-      <div class="absolute inset-0" style="background: linear-gradient(110deg, rgba(12,14,18,0.92) 0%, rgba(12,14,18,0.7) 55%, rgba(12,14,18,0.45) 100%);"></div>
-    </div>
-
-    <div class="container-wide relative py-28 w-full">
-      <div class="max-w-3xl text-white">
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-7 text-xs font-bold uppercase tracking-[0.18em]" style="background: var(--color-apato-600);">
-          ★ Best-Preis-Garantie
-        </div>
-        <h1 class="text-5xl md:text-7xl mb-6 leading-[0.95]">
-          Ihr Sportplatz:<br /><span style="color: var(--color-apato-500);">Top aufgestellt.</span>
-        </h1>
-        <p class="text-lg md:text-xl max-w-2xl mb-9 leading-relaxed text-white/85">
-          Apato Sport ist Hersteller von Sportplatzprodukten — Fußballtore, Anzeigetafeln, Tribünen, Spielerbänke, Ballfangzäune und komplette Sportanlagen. Direkt vom Hersteller, zum besten Preis.
+  <!-- HERO (Editorial, hell, Serif) -->
+  <section class="border-b" style="background: var(--color-paper-50); border-color: var(--color-steel-200);">
+    <div class="container-wide pt-16 md:pt-24 pb-10 md:pb-14">
+      <div class="eyebrow mb-6">Herstellung &amp; Vertrieb von Sportplatzprodukten</div>
+      <h1 class="text-5xl md:text-7xl lg:text-8xl leading-[0.98] max-w-4xl" style="color: var(--color-steel-900);">
+        Sportplätze,<br /><em>perfekt ausgestattet.</em>
+      </h1>
+      <div class="mt-10 grid lg:grid-cols-[1.4fr_1fr] gap-8 lg:gap-12 items-end">
+        <p class="text-lg md:text-xl leading-relaxed max-w-xl" style="color: var(--color-steel-600);">
+          Vom einzelnen Fußballtor bis zur kompletten Tribüne — Apato Sport fertigt und liefert
+          robuste Sportplatzprodukte direkt vom Hersteller. Mit Best-Preis-Garantie.
         </p>
-        <div class="flex flex-wrap gap-4">
-          <a href={u("/produkte")} class="btn-primary text-base">
-            Produkte entdecken
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round"/></svg>
-          </a>
-          <a href={u("/kontakt")} class="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold border border-white/30 text-white hover:bg-white/10 transition-all">
-            Angebot anfragen
-          </a>
+        <div class="flex flex-wrap items-center gap-5 lg:justify-end">
+          <a href={u("/produkte")} class="btn-primary text-base">Produkte ansehen</a>
+          <a href={u("/kontakt")} class="btn-link">Angebot anfragen →</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- STAT-LEISTE -->
-  <section class="relative -mt-10 z-10">
-    <div class="container-wide">
-      <div class="grid grid-cols-2 md:grid-cols-4 rounded-2xl overflow-hidden shadow-2xl bg-white">
-        {[
-          { label: "Produktkategorien", value: kategorien.length },
-          { label: "Produkte im Katalog", value: `${produktAnzahl}+` },
-          { label: "Preis-Versprechen", value: "Bestpreis" },
-          { label: "Lieferung", value: "Schnell" },
-        ].map((stat, i) => (
-          <div class={`p-6 md:p-9 ${i < 3 ? "md:border-r" : ""} ${i % 2 === 0 ? "border-r" : ""} ${i < 2 ? "border-b md:border-b-0" : ""}`} style="border-color: var(--color-steel-200);">
-            <div class="font-display text-3xl md:text-4xl mb-1" style="color: var(--color-steel-900);">{stat.value}</div>
-            <div class="text-xs uppercase tracking-[0.14em] font-semibold" style="color: var(--color-apato-600);">{stat.label}</div>
-          </div>
-        ))}
-      </div>
+  <!-- FEATURE-BILD -->
+  <section class="container-wide pt-8 md:pt-10">
+    <div class="overflow-hidden rounded-2xl">
+      <img src={u("/images/apato/banner05.jpg")} alt="Sportplatz von Apato Sport" class="w-full object-cover" style="height: clamp(280px, 48vh, 560px);" loading="eager" />
     </div>
   </section>
 
-  <!-- USP -->
-  <section class="py-20 md:py-28">
-    <div class="container-wide grid lg:grid-cols-12 gap-12">
+  <!-- KENNZAHLEN (editorial, dünne Linien) -->
+  <section class="container-wide py-14 md:py-20">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 border-b pb-12" style="border-color: var(--color-steel-200);">
+      {[
+        { value: `${kategorien.length}`, label: "Kategorien" },
+        { value: `${produktAnzahl}+`, label: "Produkte" },
+        { value: "★", label: "Best-Preis-Garantie" },
+        { value: "3 J.", label: "Garantie auf Tore" },
+      ].map((stat) => (
+        <div>
+          <div class="font-display text-4xl md:text-5xl mb-1" style="color: var(--color-steel-900);">{stat.value}</div>
+          <div class="text-xs uppercase tracking-[0.14em] font-semibold" style="color: var(--color-steel-500);">{stat.label}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- USP (editorial) -->
+  <section class="container-wide pb-8 md:pb-16">
+    <div class="grid lg:grid-cols-12 gap-12">
       <div class="lg:col-span-4">
         <div class="eyebrow mb-4">Warum Apato Sport</div>
-        <h2 class="text-4xl md:text-5xl mb-5" style="color: var(--color-steel-900);">Hersteller-<br/>qualität, fair<br/>im Preis.</h2>
-        <p class="text-lg leading-relaxed" style="color: var(--color-steel-600);">
-          Wir produzieren und vertreiben selbst. Das heißt: robuste Produkte für den harten Sportplatz-Alltag — ohne teuren Zwischenhandel.
-        </p>
+        <h2 class="text-4xl md:text-5xl" style="color: var(--color-steel-900);">Herstellerqualität,<br/><em>fair im Preis.</em></h2>
       </div>
-      <div class="lg:col-span-8 grid sm:grid-cols-3 gap-4">
+      <div class="lg:col-span-8 grid sm:grid-cols-3 gap-x-8 gap-y-10">
         {site.usp.map(u => (
-          <div class="p-7 rounded-xl border h-full" style="background: white; border-color: var(--color-steel-200);">
-            <div class="w-11 h-11 rounded-lg flex items-center justify-center mb-5 text-white" style="background: var(--color-apato-600);">
-              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
+          <div>
+            <div class="text-3xl mb-3" style="color: var(--color-apato-500); font-family: var(--font-display);">—</div>
             <h3 class="text-xl mb-2" style="color: var(--color-steel-900);">{u.title}</h3>
             <p class="text-sm leading-relaxed" style="color: var(--color-steel-600);">{u.text}</p>
           </div>
@@ -81,20 +70,17 @@ import { u } from "../lib/url";
     </div>
   </section>
 
-  <!-- KATEGORIEN -->
-  <section class="py-20 md:py-28" style="background: var(--color-paper-100);">
+  <!-- KATEGORIEN (V4-Grid) -->
+  <section class="py-16 md:py-24" style="background: var(--color-paper-100);">
     <div class="container-wide">
       <div class="flex items-end justify-between flex-wrap gap-6 mb-12">
         <div class="max-w-2xl">
-          <div class="eyebrow mb-4">Unser Sortiment</div>
-          <h2 class="text-4xl md:text-5xl mb-4" style="color: var(--color-steel-900);">Alles für den Sportplatz.</h2>
-          <p class="text-lg leading-relaxed" style="color: var(--color-steel-600);">
-            Von einzelnen Toren bis zur kompletten Anlage — wählen Sie eine Kategorie.
-          </p>
+          <div class="eyebrow mb-4">Das Sortiment</div>
+          <h2 class="text-4xl md:text-5xl" style="color: var(--color-steel-900);">Neun Kategorien für<br/><em>den ganzen Platz.</em></h2>
         </div>
-        <a href={u("/produkte")} class="btn-ghost">Alle Produkte →</a>
+        <a href={u("/produkte")} class="btn-link">Alle Produkte →</a>
       </div>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {kategorien.map(kat => <KategorieCard kat={kat} />)}
       </div>
     </div>

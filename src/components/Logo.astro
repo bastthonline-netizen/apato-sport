@@ -1,0 +1,16 @@
+---
+// Apato-Wortmarke als HTML/Text — transparent, scharf, kein Bild-Kasten.
+// "apato" in Orange, "sport" in hell. variant steuert die Textfarbe von "sport".
+interface Props {
+  variant?: "light" | "dark"; // light = für dunklen Header, dark = für hellen Grund
+  class?: string;
+}
+const { variant = "light", class: cls = "" } = Astro.props;
+const sportColor = variant === "light" ? "#FFFFFF" : "var(--color-steel-900)";
+---
+
+<span class={`inline-flex items-baseline font-display leading-none select-none ${cls}`} style="letter-spacing: -0.02em;">
+  <span style="color: var(--color-apato-600); font-weight: 600;">apato</span>
+  <span style={`color: ${sportColor}; font-weight: 600; margin-left: 0.1em;`}>sport</span>
+  <span aria-hidden="true" style="color: var(--color-apato-500); font-weight: 600;">.</span>
+</span>

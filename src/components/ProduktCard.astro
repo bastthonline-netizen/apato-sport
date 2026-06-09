@@ -18,9 +18,14 @@ const href = `/produkte/${kategorie.slug}/${produkt.slug}`;
   <div class="p-4 flex-1 flex flex-col">
     <h3 class="text-base font-semibold leading-snug mb-1" style="color: var(--color-steel-900); font-family: var(--font-sans);">{produkt.name}</h3>
     {produkt.blurb && <p class="text-sm leading-relaxed mb-3 flex-1" style="color: var(--color-steel-500);">{produkt.blurb}</p>}
-    <span class={`font-semibold text-sm inline-flex items-center gap-1 transition-transform group-hover:translate-x-0.5 ${produkt.blurb ? "" : "mt-auto pt-2"}`} style="color: var(--color-apato-600);">
-      Details & Anfrage
-      <svg class="w-3.5 h-3.5" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h6M6 3l3 3-3 3" stroke-linecap="round"/></svg>
-    </span>
+    <div class={`flex items-end justify-between gap-2 ${produkt.blurb ? "" : "mt-auto pt-2"}`}>
+      <span class="font-semibold text-sm inline-flex items-center gap-1 transition-transform group-hover:translate-x-0.5" style="color: var(--color-apato-600);">
+        Details
+        <svg class="w-3.5 h-3.5" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h6M6 3l3 3-3 3" stroke-linecap="round"/></svg>
+      </span>
+      <span class="text-sm font-semibold whitespace-nowrap" style="color: var(--color-steel-900);">
+        {produkt.price ? <>{produkt.priceFrom ? <span class="font-normal" style="color: var(--color-steel-400);">ab </span> : null}{produkt.price}</> : <span class="font-normal" style="color: var(--color-steel-400);">auf Anfrage</span>}
+      </span>
+    </div>
   </div>
 </a>
